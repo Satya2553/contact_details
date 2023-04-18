@@ -15,3 +15,11 @@ class contact_det(models.Model):
     
     def __str__(self):
         return self.first_name + " " +self.last_name
+    
+    
+class User(models.Model):
+    username = models.CharField(max_length=25, unique=True)
+    contacts = models.ManyToManyField(contact_det)
+
+    def __str__(self):
+        return self.username

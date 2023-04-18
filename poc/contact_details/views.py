@@ -4,6 +4,7 @@ from django.http import JsonResponse
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
+from django.shortcuts import render,redirect
 
 
 @api_view(['GET','POST'])
@@ -38,3 +39,21 @@ def contact_detail(request,id):
     elif request.method == 'DELETE':
         contact.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+    
+def index(request):
+    if request.method == 'POST':
+        username = request.POST['username']
+        return redirect('user_contacts/'+ username)
+    return render(request,'index.html')
+
+def user_contacts(request, pk):
+    try:
+        user = User.objects.get(username=pk)
+        user_contacts = user.contacts.all() # Retrieve contacts associated with the user
+    except User.DoesNotExist:
+        user_contacts = None
+
+    context = {
+        'user_contacts': user_contacts
+    }
+    return render(request, 'contact.html', context)

@@ -1,1 +1,9 @@
-<h1>hello</h1>
+
+<form method="post" action="search">
+						{% csrf_token %}
+							<input type="text" name="username" />
+							<label>Username</label>
+							<button type="submit">
+								Search Contacts
+	</button>
+</form>
