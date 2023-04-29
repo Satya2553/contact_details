@@ -2,10 +2,10 @@ from django.urls import path, include
 from . import views
 
 from rest_framework.routers import SimpleRouter
-from . import viewsets,views
+from . import views
 
 router = SimpleRouter()
-router.register(r'contact',viewsets.ContactViewSet,basename='contact')
+router.register(r'contact',views.ContactView,basename='contact')
 
 urlpatterns = [
     path('user',views.index),
