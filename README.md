@@ -27,3 +27,7 @@
 </pre>
 
 <p>This will launch the application and make it accessible locally at <a href="http://127.0.0.1:8000/">http://127.0.0.1:8000/</a> in your web browser.</p>
+
+
+<p> Go to <a href="http://127.0.0.1:8000/contact">http://127.0.0.1:8000/contact</a> to view all contacts </p>
+<p> Go to <a href="http://127.0.0.1:8000/swagger">http://127.0.0.1:8000/swagger</a> to view documentation </p>
