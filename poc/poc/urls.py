@@ -17,7 +17,27 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path,include
 
+from drf_yasg import openapi
+from drf_yasg.views import get_schema_view
+
+from django.conf import settings
+
+schema_view = get_schema_view(
+    openapi.Info(
+        title = 'Contact API',
+        default_version='1.0.0',
+        description='Contact API documentation for POC',
+    ),
+    public=True,
+)
+
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('contact_details.urls'))
+    path('', include('contact_details.urls')),
+    path('swagger',schema_view.with_ui('swagger',cache_timeout=0),name='swagger'),
+    
 ]
+
+if settings.DEBUG:
+    import debug_toolbar
+    urlpatterns.append(path('__debug__/', include(debug_toolbar.urls)),)

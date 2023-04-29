@@ -1,10 +1,14 @@
 from django.urls import path, include
 from . import views
+
+from rest_framework.routers import SimpleRouter
+from . import viewsets,views
+
+router = SimpleRouter()
+router.register(r'contact',viewsets.ContactViewSet,basename='contact')
+
 urlpatterns = [
-    path('',views.index),
-    path('contacts',views.contact_list,name='contacts'),
-    path('contacts/<int:id>',views.contact_detail),
+    path('user',views.index),
     path('search',views.index,name='search'),
-    path('user_contacts/<str:pk>',views.user_contacts,name='user_contacts')
-    
-]
+    path('user_contacts/<str:pk>',views.user_contacts,name='user_contacts'),
+] + router.get_urls()
