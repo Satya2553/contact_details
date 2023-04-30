@@ -1,3 +1,5 @@
- {% for x in user_contacts %}
-    <h>{{x}}</h><br>
+{% for contact in user_contacts %}
+    <a href="{% url 'contact_payable' contact.id %}">
+        <h3>{{ contact.first_name }} {{ contact.last_name }}</h3>
+    </a>
 {% endfor %}

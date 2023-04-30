@@ -23,3 +23,12 @@ class User(models.Model):
 
     def __str__(self):
         return self.username
+    
+class Payment(models.Model):
+    contact = models.OneToOneField(contact_det, on_delete=models.CASCADE)
+    payable_amount = models.DecimalField(max_digits=8, decimal_places=2)
+    days_attended = models.IntegerField()
+    total_days = models.IntegerField()
+
+    def __str__(self):
+         return f"{self.contact.first_name} {self.contact.last_name} Payment"
