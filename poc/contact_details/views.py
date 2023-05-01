@@ -3,6 +3,10 @@ from django.shortcuts import render,redirect,get_object_or_404
 from rest_framework.viewsets import ModelViewSet
 from .serializers import ContactSerailizer
 from datetime import datetime
+from django.core.mail import EmailMessage
+from django.conf import settings
+from django.http import HttpResponse
+from django.template.loader import render_to_string
 
 class ContactView(ModelViewSet):
     queryset = contact_det.objects.all()
@@ -39,4 +43,24 @@ def contact_payable(request, contact_id):
         'date': datetime.today()
     }
     return render(request, 'paybill.html', context)
+
+
+
+def email(request):
+    if request.method == 'POST':
+        pdf=request.POST.get('pdf-input')
+        path="D:/resumes/myresume3.pdf"
+        try:
+            email = EmailMessage(
+                'subject',
+                'Your Paybill is here',
+                settings.EMAIL_HOST_USER,
+                ['20vv1a0529@gmail.com'],
+            )
+            email.attach_file(path)
+            email.fail_silently = False
+            email.send()
+            return HttpResponse('Email sent successfully!')
+        except Exception as e:
+            return HttpResponse('Failed to send email: {}'.format(str(e)), status=500)
     
